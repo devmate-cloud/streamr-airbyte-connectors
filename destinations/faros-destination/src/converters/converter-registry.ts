@@ -27,7 +27,7 @@ export class ConverterRegistry {
     streamName: StreamName,
     onLoadError?: (err: Error) => void
   ): Converter | undefined {
-    const name = streamName.stringify();
+    const name = streamName.asString;
 
     const res = ConverterRegistry.convertersByStream[name];
     if (res && typeof res !== 'boolean') return res;
@@ -45,13 +45,13 @@ export class ConverterRegistry {
       // Keep the converter instance in the registry
       ConverterRegistry.convertersByStream[name] = converter;
       return converter;
-    } catch (e) {
+    } catch (e: any) {
       // Tried loading the converter but failed - no need to retry
       ConverterRegistry.convertersByStream[name] = true;
       if (onLoadError) {
-        const err = e?.message ? `: ${e.message}` : '';
+        const err = e.message ?? String(e);
         onLoadError(
-          new VError(`Failed loading converter for stream ${name}${err}`)
+          new VError(`Failed loading converter for stream ${name}: ${err}`)
         );
       }
       return undefined;

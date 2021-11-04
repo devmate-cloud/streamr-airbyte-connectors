@@ -1,16 +1,19 @@
 import {AirbyteRecord} from 'faros-airbyte-cdk';
 import {Utils} from 'faros-feeds-sdk';
 
-import {Converter, DestinationModel, DestinationRecord} from '../converter';
-import {GithubCommon} from './common';
+import {DestinationModel, DestinationRecord, StreamContext} from '../converter';
+import {GithubCommon, GithubConverter} from './common';
 
-export class GithubCommits extends Converter {
+export class GithubCommits extends GithubConverter {
   readonly destinationModels: ReadonlyArray<DestinationModel> = [
     'vcs_BranchCommitAssociation',
     'vcs_Commit',
   ];
 
-  convert(record: AirbyteRecord): ReadonlyArray<DestinationRecord> {
+  convert(
+    record: AirbyteRecord,
+    ctx: StreamContext
+  ): ReadonlyArray<DestinationRecord> {
     const source = this.streamName.source;
     const commit = record.record.data;
     const res: DestinationRecord[] = [];
@@ -22,10 +25,7 @@ export class GithubCommits extends Converter {
 
     if (!repository) return res;
 
-    // TODO: change user uid to login once it's available
-    const author = commit.author_id
-      ? {uid: `${commit.author_id}`, source}
-      : null;
+    const author = commit.author ? {uid: commit.author.login, source} : null;
 
     res.push({
       model: 'vcs_Commit',
@@ -40,7 +40,15 @@ export class GithubCommits extends Converter {
       },
     });
 
-    // TODO: add vcs_BranchCommitAssociation once the branch is present in commit
+    if (commit.branch) {
+      res.push({
+        model: 'vcs_BranchCommitAssociation',
+        record: {
+          commit: {sha: commit.sha, repository},
+          branch: {name: commit.branch, repository},
+        },
+      });
+    }
 
     return res;
   }

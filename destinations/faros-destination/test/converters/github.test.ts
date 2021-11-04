@@ -22,8 +22,8 @@ describe('github', () => {
     prettyPrint: {levelFirst: true},
   });
   const mockttp = getLocal({debug: false, recordTraffic: false});
-  const catalogPath = 'test/resources/github-catalog.json';
-  const catalogRawPath = 'test/resources/github-catalog-raw.json';
+  const catalogPath = 'test/resources/github/catalog.json';
+  const catalogRawPath = 'test/resources/github/catalog-raw.json';
   let configPath: string;
   const graphSchema = JSON.parse(readTestResourceFile('graph-schema.json'));
   const revisionId = 'test-revision-id';
@@ -250,8 +250,10 @@ describe('github', () => {
       tms_TaskBoard: 50,
       tms_TaskBoardProjectRelationship: 50,
       tms_TaskBoardRelationship: 1,
-      tms_User: 13,
+      tms_TaskTag: 2,
+      tms_User: 14,
       vcs_Branch: 4,
+      vcs_BranchCommitAssociation: 1,
       vcs_Commit: 77,
       vcs_Membership: 12,
       vcs_Organization: 1,

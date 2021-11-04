@@ -1,8 +1,10 @@
 {
   "name": "example-source",
-  "version": "0.1.9",
+  "version": "0.1.23",
   "description": "Example Airbyte source",
   "keywords": [
+    "airbyte",
+    "source",
     "faros"
   ],
   "homepage": "https://www.faros.ai",
@@ -27,13 +29,17 @@
     "watch": "tsc -b -w src test"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "commander": "^8.0.0",
-    "faros-airbyte-cdk": "^0.1.9",
+    "axios": "^0.21.4",
+    "commander": "^8.2.0",
+    "faros-airbyte-cdk": "^0.1.23",
     "verror": "^1.10.0"
   },
   "jest": {
     "coverageDirectory": "out/coverage",
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/test/"
+    ],
     "preset": "ts-jest",
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
@@ -46,17 +52,5 @@
         "tsconfig": "test/tsconfig.json"
       }
     }
-  },
-  "lint-staged": {
-    "**/*.ts": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
-  "prettier": {
-    "bracketSpacing": false,
-    "parser": "typescript",
-    "trailingComma": "es5",
-    "singleQuote": true
   }
 }

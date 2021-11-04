@@ -1,8 +1,9 @@
+import {AirbyteRecord} from 'faros-airbyte-cdk';
 import {Utils} from 'faros-feeds-sdk';
 import {toLower} from 'lodash';
 import {Dictionary} from 'ts-essentials';
 
-import {DestinationRecord} from '../converter';
+import {Converter, DestinationRecord} from '../converter';
 
 /** Common functions shares across GitHub converters */
 export class GithubCommon {
@@ -54,8 +55,8 @@ export class GithubCommon {
     return {
       model: 'vcs_User',
       record: {
-        uid: `${user.id}`, // TODO: change user uid to login once it's available
-        name: user.login ?? user.name ?? null,
+        uid: user.login,
+        name: user.name ?? user.login ?? null,
         htmlUrl: user.html_url ?? null,
         type,
         source,
@@ -81,8 +82,8 @@ export class GithubCommon {
     return {
       model: 'tms_User',
       record: {
-        uid: `${user.id}`, // TODO: change user uid to login once it's available
-        name: user.login ?? user.name ?? null,
+        uid: user.login,
+        name: user.name ?? user.login ?? null,
         source,
       },
     };
@@ -146,6 +147,14 @@ export class GithubCommon {
     return Utils.parseInteger(
       pull_request_url.substring(pull_request_url.lastIndexOf('/') + 1)
     );
+  }
+}
+
+/** Github converter base */
+export abstract class GithubConverter extends Converter {
+  /** All Github records should have id property */
+  id(record: AirbyteRecord): any {
+    return record?.record?.data?.id;
   }
 }
 

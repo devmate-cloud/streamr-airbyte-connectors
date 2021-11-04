@@ -1,10 +1,15 @@
 import {AirbyteRecord} from 'faros-airbyte-cdk';
 import {Utils} from 'faros-feeds-sdk';
 
-import {Converter, DestinationModel, DestinationRecord} from '../converter';
-import {GithubCommon} from './common';
+import {
+  DestinationModel,
+  DestinationRecord,
+  StreamContext,
+  StreamName,
+} from '../converter';
+import {GithubCommon, GithubConverter} from './common';
 
-export class GithubIssues extends Converter {
+export class GithubIssues extends GithubConverter {
   readonly destinationModels: ReadonlyArray<DestinationModel> = [
     'tms_Label',
     'tms_Task',
@@ -14,7 +19,16 @@ export class GithubIssues extends Converter {
     'tms_User',
   ];
 
-  convert(record: AirbyteRecord): ReadonlyArray<DestinationRecord> {
+  private readonly issueLabelsStream = new StreamName('github', 'issue_labels');
+
+  override get dependencies(): ReadonlyArray<StreamName> {
+    return [this.issueLabelsStream];
+  }
+
+  convert(
+    record: AirbyteRecord,
+    ctx: StreamContext
+  ): ReadonlyArray<DestinationRecord> {
     const source = this.streamName.source;
     const issue = record.record.data;
     const res: DestinationRecord[] = [];
@@ -27,46 +41,34 @@ export class GithubIssues extends Converter {
       return res;
     }
 
+    let user: DestinationRecord | undefined;
     if (issue.user) {
-      res.push(GithubCommon.tms_User(issue.user, source));
+      user = GithubCommon.tms_User(issue.user, source);
+      res.push(user);
     }
 
     issue.assignees?.forEach((a) => {
-      if (typeof a === 'number') {
-        res.push({
-          model: 'tms_TaskAssignment',
-          record: {
-            task: {uid, source},
-            // TODO: change user uid to login once it's available
-            assignee: {uid: `${a}`, source},
-          },
-        });
-      } else if (a?.id || a?.login) {
-        res.push(GithubCommon.tms_User(a, source));
-        res.push({
-          model: 'tms_TaskAssignment',
-          record: {
-            task: {uid, source},
-            // TODO: change user uid to login once it's available
-            assignee: {uid: `${a.id}`, source},
-          },
-        });
-      }
-    });
-
-    issue.labels.forEach((l) => {
+      const assignee = GithubCommon.tms_User(a, source);
+      res.push(assignee);
       res.push({
-        model: 'tms_Label',
-        record: {name: l.name},
-      });
-      res.push({
-        model: 'tms_TaskTag',
+        model: 'tms_TaskAssignment',
         record: {
           task: {uid, source},
-          label: {name: l.name},
+          assignee: {uid: assignee.record.uid, source},
         },
       });
     });
+
+    const issueLabelsStream = this.issueLabelsStream.asString;
+    for (const id of issue.labels) {
+      const label = ctx.get(issueLabelsStream, String(id));
+      const name = label?.record?.data?.name;
+      if (!name) continue;
+      res.push({
+        model: 'tms_TaskTag',
+        record: {task: {uid, source}, label: {name}},
+      });
+    }
 
     // Github issues only have state either open or closed
     const category = issue.state === 'open' ? 'Todo' : 'Done';
@@ -82,8 +84,7 @@ export class GithubIssues extends Converter {
         status: {category, detail: issue.state},
         createdAt: Utils.toDate(issue.created_at),
         updatedAt: Utils.toDate(issue.updated_at),
-        // TODO: change user uid to login once it's available
-        creator: issue.user ? {uid: `${issue.user.id}`, source} : undefined,
+        creator: user ? {uid: user.record.uid, source} : undefined,
         source,
       },
     });
