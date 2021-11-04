@@ -6,10 +6,15 @@
     "build": "lerna run build",
     "clean": "lerna run clean && rm -rf node_modules out",
     "lint": "lerna run lint",
-    "prepare": "lerna bootstrap --hoist && husky install",
+    "prepare": "lerna bootstrap && husky install",
     "test": "lerna run test -- -- --color",
     "test-cov": "lerna run test -- -- --coverage --color"
   },
+  "workspaces": [
+    "faros-airbyte-cdk",
+    "destinations/**",
+    "sources/**"
+  ],
   "devDependencies": {
     "@types/eslint": "^7.28.2",
     "@types/fast-redact": "^3.0.1",

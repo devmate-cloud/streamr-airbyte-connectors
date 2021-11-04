@@ -1,5 +1,7 @@
 {
   "version": "0.1.23",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "packages": [
     "faros-airbyte-cdk",
     "destinations/**",
