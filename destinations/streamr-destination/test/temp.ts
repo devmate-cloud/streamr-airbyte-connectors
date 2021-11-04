@@ -26,14 +26,14 @@ export async function tempFile(
  * @return path to the temporary config file
  */
 export async function tempConfig(
-  private_key: string,
-  stream_id: string,
+  privateKey: string,
+  streamId: string,
   invalid_record_strategy: InvalidRecordStrategy = InvalidRecordStrategy.SKIP,
   source_specific_configs?: Dictionary<any>
 ): Promise<string> {
   const conf = {
-    private_key,
-    stream_id,
+    privateKey,
+    streamId,
     invalid_record_strategy,
     source_specific_configs,
   };

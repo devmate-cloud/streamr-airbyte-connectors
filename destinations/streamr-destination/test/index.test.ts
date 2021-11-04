@@ -10,8 +10,9 @@ import os from 'os';
 import {CLI, read} from './cli';
 import {tempConfig} from './temp';
 
-const privateKey = 'test-private-key';
-const streamId = 'test-stream-id';
+const privateKey =
+  '9c9853f5ad682ae1552cf9bb205da37b704bc6d6105a94e190c5727d25e3e6cc';
+const streamId = '0x0d0102474519cd2fc1b3e3f962a87e39cbcbead2/test-streamr';
 
 describe('index', () => {
   // const mockttp = getLocal({debug: false, recordTraffic: false});
@@ -65,5 +66,5 @@ describe('index', () => {
       ) + os.EOL
     );
     expect(await cli.wait()).toBe(0);
-  });
+  }, 20000);
 });

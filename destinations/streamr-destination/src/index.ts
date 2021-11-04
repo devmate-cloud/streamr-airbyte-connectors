@@ -105,12 +105,12 @@ class StreamrDestination extends AirbyteDestination {
     try {
       const exists = await this.getStreamrClient().getStream(config.streamId);
       if (!exists) {
-        throw new VError(`Stream id ${config.graph} does not exist`);
+        throw new VError(`Stream id ${config.streamId} does not exist`);
       }
     } catch (e) {
       return new AirbyteConnectionStatusMessage({
         status: AirbyteConnectionStatus.FAILED,
-        message: `Invalid Streamr graph ${config.graph}. Error: ${e}`,
+        message: `Not found stream ${config.streamId}. Error: ${e}`,
       });
     }
     return new AirbyteConnectionStatusMessage({
@@ -164,10 +164,11 @@ class StreamrDestination extends AirbyteDestination {
         );
       }
 
-      const client = await this.getStreamrClient().getOrCreateStream(
-        config.streamId
-      );
-      client.publish(streams, new Date());
+      // TODO: Move streamr to instace property
+      // const client = await this.getStreamrClient().getOrCreateStream(
+      //   config.streamId
+      // );
+      // client.publish(streams, new Date());
       // TODO: Print writer output
 
       await this.writeEntries(config, stdin, streams, stateMessages);
@@ -216,11 +217,11 @@ class StreamrDestination extends AirbyteDestination {
             if (!recordMessage.record) {
               throw new VError('Empty record');
             }
-            if (!streams[recordMessage.record.stream]) {
-              throw new VError(
-                `Undefined stream ${recordMessage.record.stream}`
-              );
-            }
+            // if (!streams[recordMessage.record.stream]) {
+            //   throw new VError(
+            //     `Undefined stream ${recordMessage.record.stream}`
+            //   );
+            // }
             const unpacked = recordMessage.unpackRaw();
             if (!unpacked.record) {
               throw new VError('Empty unpacked record');
@@ -229,13 +230,31 @@ class StreamrDestination extends AirbyteDestination {
             const count = stats.processedByStream[stream];
             stats.processedByStream[stream] = count ? count + 1 : 1;
 
-            const writeRecord = (context: any): void => {
-              writer.write(stream);
-              stats.recordsWritten++;
-              stats.recordsProcessed++;
+            const writeRecord = async (context: any): Promise<any> => {
+              const client = await this.getStreamrClient().getOrCreateStream(
+                config.streamId
+              );
+              client
+                .publish(
+                  unpacked.record,
+                  new Date(
+                    Number.isNaN(unpacked.record.emitted_at)
+                      ? Date.now()
+                      : unpacked.record.emitted_at
+                  )
+                )
+                .then(() => {
+                  writer?.write(context);
+                  stats.recordsWritten++;
+                  stats.recordsProcessed++;
+                });
             };
 
-            writeRecord(unpacked);
+            writeRecord(unpacked)
+              .then()
+              .catch((error) => {
+                throw new VError('Error sync record');
+              });
           }
         });
       }
@@ -294,23 +313,23 @@ class StreamrDestination extends AirbyteDestination {
     const streams = keyBy(catalog.streams, (s) => s.stream.name);
     const streamKeys = Object.keys(streams);
     const deleteModelEntries: string[] = [];
-    const dependenciesByStream: Dictionary<Set<string>> = {};
 
     // Check input streams & initialize record converters
-    for (const stream of streamKeys) {
-      const destinationSyncMode = streams[stream].destination_sync_mode;
-      if (!destinationSyncMode) {
-        throw new VError(
-          `Undefined destination sync mode for stream ${stream}`
-        );
-      }
+    // TODO: Check on destination sync mode
+    // for (const stream of streamKeys) {
+    //   const destinationSyncMode = streams[stream].destination_sync_mode;
+    //   if (!destinationSyncMode) {
+    //     throw new VError(
+    //       `Undefined destination sync mode for stream ${stream}`
+    //     );
+    //   }
 
-      // Prepare destination models to delete if any
-      if (destinationSyncMode === DestinationSyncMode.OVERWRITE) {
-        // TODO: PUSH TO delete list
-        // deleteModelEntries.push(...converter.destinationModels);
-      }
-    }
+    //   // Prepare destination models to delete if any
+    //   if (destinationSyncMode === DestinationSyncMode.OVERWRITE) {
+    //     // TODO: PUSH TO delete list
+    //     // deleteModelEntries.push(...converter.destinationModels);
+    //   }
+    // }
 
     return {
       streams,
