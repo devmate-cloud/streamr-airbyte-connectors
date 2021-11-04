@@ -86,20 +86,13 @@ class StreamrDestination extends AirbyteDestination {
   }
 
   async check(config: AirbyteConfig): Promise<AirbyteConnectionStatusMessage> {
+    // TODO: How to validate that private key is valid?
     try {
       this.init(config);
     } catch (e: any) {
       return new AirbyteConnectionStatusMessage({
         status: AirbyteConnectionStatus.FAILED,
         message: e.message,
-      });
-    }
-    try {
-      await this.getStreamrClient().connect();
-    } catch (e) {
-      return new AirbyteConnectionStatusMessage({
-        status: AirbyteConnectionStatus.FAILED,
-        message: `Invalid Streamr Privated key. Error: ${e}`, // TODO:
       });
     }
     try {
@@ -231,23 +224,15 @@ class StreamrDestination extends AirbyteDestination {
             stats.processedByStream[stream] = count ? count + 1 : 1;
 
             const writeRecord = async (context: any): Promise<any> => {
+              // TODO: Move stream id into static
               const client = await this.getStreamrClient().getOrCreateStream(
                 config.streamId
               );
-              client
-                .publish(
-                  unpacked.record,
-                  new Date(
-                    Number.isNaN(unpacked.record.emitted_at)
-                      ? Date.now()
-                      : unpacked.record.emitted_at
-                  )
-                )
-                .then(() => {
-                  writer?.write(context);
-                  stats.recordsWritten++;
-                  stats.recordsProcessed++;
-                });
+              client.publish(unpacked.record, Date.now()).then(() => {
+                writer?.write(context);
+                stats.recordsWritten++;
+                stats.recordsProcessed++;
+              });
             };
 
             writeRecord(unpacked)

@@ -5,12 +5,13 @@ WORKDIR /home/node/airbyte
 RUN apk add --update python make g++\
    && rm -rf /var/cache/apk/*
 
-COPY lerna.json .tsconfig.json package.json package-lock.json ./
+COPY lerna.json .tsconfig.json package.json yarn.lock ./
 RUN sed -i "/eslint\|husky\|jest\|lint-staged\|mockttp\|prettier/d" package.json
 COPY ./faros-airbyte-cdk ./faros-airbyte-cdk
 # COPY ./sources ./sources
 COPY ./destinations ./destinations
 RUN yarn
+RUN yarn build
 
 ARG path
 RUN test -n "$path" || (echo "'path' argument is not set, e.g --build-arg path=destinations/faros-destination" && false)
