@@ -1,14 +1,16 @@
 FROM node:14-alpine
 
 WORKDIR /home/node/airbyte
-RUN npm install -g npm@7 lerna tsc
+# RUN npm install -g yarn
+RUN apk add --update python make g++\
+   && rm -rf /var/cache/apk/*
 
 COPY lerna.json .tsconfig.json package.json package-lock.json ./
 RUN sed -i "/eslint\|husky\|jest\|lint-staged\|mockttp\|prettier/d" package.json
 COPY ./faros-airbyte-cdk ./faros-airbyte-cdk
-COPY ./sources ./sources
+# COPY ./sources ./sources
 COPY ./destinations ./destinations
-RUN lerna bootstrap --hoist
+RUN yarn
 
 ARG path
 RUN test -n "$path" || (echo "'path' argument is not set, e.g --build-arg path=destinations/faros-destination" && false)
