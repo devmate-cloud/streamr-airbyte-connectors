@@ -18,7 +18,7 @@ import {
 import _, {keyBy, sortBy, uniq} from 'lodash';
 import readline from 'readline';
 import {Writable} from 'stream';
-import {StreamrClient} from 'streamr-client';
+import {Stream, StreamrClient} from 'streamr-client';
 import {Dictionary} from 'ts-essentials';
 import {VError} from 'verror';
 
@@ -62,15 +62,12 @@ interface WriteStats {
   writtenByModel: Dictionary<number>;
 }
 
-interface StreamrDestinationState {
-  readonly lastSynced: string;
-}
-
 /** Streamr destination implementation. */
 class StreamrDestination extends AirbyteDestination {
   constructor(
     private readonly logger: AirbyteLogger,
     private streamrClient: StreamrClient = undefined,
+    private streamr: Stream = undefined,
     private invalidRecordStrategy: InvalidRecordStrategy = InvalidRecordStrategy.SKIP
   ) {
     super();
@@ -88,13 +85,14 @@ class StreamrDestination extends AirbyteDestination {
   async check(config: AirbyteConfig): Promise<AirbyteConnectionStatusMessage> {
     // TODO: How to validate that private key is valid?
     try {
-      this.init(config);
+      await this.init(config);
     } catch (e: any) {
       return new AirbyteConnectionStatusMessage({
         status: AirbyteConnectionStatus.FAILED,
         message: e.message,
       });
     }
+
     try {
       const exists = await this.getStreamrClient().getStream(config.streamId);
       if (!exists) {
@@ -111,7 +109,7 @@ class StreamrDestination extends AirbyteDestination {
     });
   }
 
-  private init(config: AirbyteConfig): void {
+  private async init(config: AirbyteConfig): Promise<void> {
     if (!config.privateKey) {
       throw new VError('Missing private key');
     }
@@ -125,6 +123,8 @@ class StreamrDestination extends AirbyteDestination {
           privateKey: config.privateKey,
         },
       });
+
+      this.streamr = await this.streamrClient.getStream(config.streamId);
     } catch (e) {
       throw new VError(`Failed to initialize Streamr Client. Error: ${e}`);
     }
@@ -136,7 +136,7 @@ class StreamrDestination extends AirbyteDestination {
     stdin: NodeJS.ReadStream,
     dryRun: boolean
   ): AsyncGenerator<AirbyteStateMessage> {
-    this.init(config);
+    await this.init(config);
 
     const {streams, deleteModelEntries} =
       this.initStreamsCheckConverters(catalog);
@@ -224,11 +224,7 @@ class StreamrDestination extends AirbyteDestination {
             stats.processedByStream[stream] = count ? count + 1 : 1;
 
             const writeRecord = async (context: any): Promise<any> => {
-              // TODO: Move stream id into static
-              const client = await this.getStreamrClient().getOrCreateStream(
-                config.streamId
-              );
-              client.publish(unpacked.record, Date.now()).then(() => {
+              this.streamr.publish(unpacked.record, Date.now()).then(() => {
                 writer?.write(context);
                 stats.recordsWritten++;
                 stats.recordsProcessed++;
