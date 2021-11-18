@@ -15,11 +15,13 @@
     "properties": {
       "privateKey": {
         "type": "string",
-        "description": "privateKey on Streamr"
+        "description": "You private key on Streamr",
+        "airbyte_secret": true
       },
       "streamId": {
         "type": "string",
-        "description": "Streamr ID"
+        "description": "Your full Stream ID",
+        "examples": ["0x0d0102474519cd2fc1b3e3f962a87e39cbcbead2/test-streamr"]
       }
     }
   }
