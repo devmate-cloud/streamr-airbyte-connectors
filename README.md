@@ -1,17 +1,12 @@
-# Airbyte Connectors
+# Streamr Airbyte Destination
 
+![Streamr and Airbyte!](./AirbyteStreamr.png)
 
-[![CI](https://github.com/faros-ai/airbyte-connectors/actions/workflows/ci.yml/badge.svg)](https://github.com/faros-ai/airbyte-connectors/actions/workflows/ci.yml) [![Release](https://github.com/faros-ai/airbyte-connectors/actions/workflows/release.yml/badge.svg)](https://github.com/faros-ai/airbyte-connectors/actions/workflows/release.yml) [![CodeQL](https://github.com/faros-ai/airbyte-connectors/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/faros-ai/airbyte-connectors/actions/workflows/codeql-analysis.yml) 
+# Airbyte + Streamr
+- Data ingestion is hard, Airbyte makes it more easy and scalable
+- Take advantage of many data sources from files, api, databases,...
+- Let users have a choice other than traditional, centralize solutions (Kafka, BigQuery, Snowflake,...)
 
-This repository contains [Airbyte](https://airbyte.io/) CDK and connectors implementations.
-See the READMEs inside `destinations/` and `sources/` subfolders for more information on each connector.
-
-Component | Code | Installation | Version
-----------|-----------|------|--------
-Airbyte CDK | [faros-airbyte-cdk](faros-airbyte-cdk) | `npm i faros-airbyte-cdk` |[![npm package](https://img.shields.io/npm/v/faros-airbyte-cdk?color=blue&label=npm%20package)](https://www.npmjs.com/package/faros-airbyte-cdk)
-Faros Destination | [destinations/faros-destination](destinations/faros-destination) | `docker pull farosai/airbyte-faros-destination` | ![](https://img.shields.io/github/v/tag/faros-ai/airbyte-connectors?label=)
-Jenkins Source | [sources/jenkins-source](sources/jenkins-source) | `docker pull farosai/airbyte-jenkins-source` | ![](https://img.shields.io/github/v/tag/faros-ai/airbyte-connectors?label=)
-Phabricator Source | [sources/phabricator-source](sources/phabricator-source) | `docker pull farosai/airbyte-phabricator-source` | ![](https://img.shields.io/github/v/tag/faros-ai/airbyte-connectors?label=)
 
 # Development
 
@@ -37,23 +32,15 @@ In order to build a Docker image for a connector run the `docker build` command 
 For example for Faros Destination connector run:
 
 ```shell
-docker build . --build-arg path=destinations/faros-destination -t faros-destination
+docker build . --build-arg path=destinations/streamr-destination -t airbyte-destination-streamr
 ```
 
 And then run it:
 ```shell
-docker run faros-destination
+docker run airbyte-destination-streamr
 ```
 
 # Releasing
-
-## Publish CDK to NPM
-
-To publish the CDK package to [NPM](https://www.npmjs.com), run `npm run bump` from the root of the
-repository. You will be prompted with a list of version increments to choose
-from (patch, minor, major, etc). Choose the desired increment, then commit and
-push the changed files. GitHub will automatically create a corresponding tag and
-publish the CDK to NPM once the changed files are merged to the main branch.
 
 ## Publish Connector Docker images
 
