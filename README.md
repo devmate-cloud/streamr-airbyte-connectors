@@ -7,6 +7,17 @@
 - Take advantage of many data sources from files, api, databases,...
 - Let users have a choice other than traditional, centralize solutions (Kafka, BigQuery, Snowflake,...)
 
+# Docker images
+
+https://hub.docker.com/repository/docker/mihthanh27/airbyte-destination-streamr
+```
+docker pull mihthanh27/airbyte-destination-streamr
+```
+
+# How to use
+Go to Airbyte > Settings > Destination
+
+![Airbyte Settings!](./Settings.png)
 
 # Development
 
