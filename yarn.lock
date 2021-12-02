@@ -1282,6 +1282,15 @@
     "@ethersproject/rlp" "^5.5.0"
     "@ethersproject/signing-key" "^5.5.0"
 
+"@ethersproject/units@^5.1.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@ethersproject/units/-/units-5.5.0.tgz#104d02db5b5dc42cc672cc4587bafb87a95ee45e"
+  integrity sha512-7+DpjiZk4v6wrikj+TCyWWa9dXLNU73tSTa7n0TSJDxkYbV3Yf1eRh9ToMLlZtuctNYu9RDNNy2USq3AdqSbag==
+  dependencies:
+    "@ethersproject/bignumber" "^5.5.0"
+    "@ethersproject/constants" "^5.5.0"
+    "@ethersproject/logger" "^5.5.0"
+
 "@ethersproject/wallet@^5.1.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/wallet/-/wallet-5.5.0.tgz#322a10527a440ece593980dca6182f17d54eae75"
@@ -8697,9 +8706,9 @@ streamr-client-protocol@^9.0.0:
     strict-event-emitter-types "^2.0.0"
 
 streamr-client@^5.4.5:
-  version "5.4.5"
-  resolved "https://registry.yarnpkg.com/streamr-client/-/streamr-client-5.4.5.tgz#c40986187c321cbab48c70b5c6df8c238135b932"
-  integrity sha512-8+FG7ee8W5ktNbqnvcQh7rjuDU7Iw8DLuWOxo2gqDWkFLraTG9U/H+HqVkp3Il2FbV0dlO26ej86c3WY+zHYXw==
+  version "5.5.7"
+  resolved "https://registry.yarnpkg.com/streamr-client/-/streamr-client-5.5.7.tgz#a4a9ff714566c8e1934276789887afecf4ca505f"
+  integrity sha512-qlCpTJMDEPeqlLdXmuSpa98EzIakAeoFxU+8dKJs4wBRn09NzoDB6xRZJB/IVRaGRC6jyhaAtyz8fWJHdzm+nQ==
   dependencies:
     "@babel/runtime" "^7.14.0"
     "@babel/runtime-corejs3" "^7.14.0"
@@ -8714,6 +8723,7 @@ streamr-client@^5.4.5:
     "@ethersproject/providers" "^5.1.2"
     "@ethersproject/sha2" "^5.1.0"
     "@ethersproject/transactions" "^5.1.1"
+    "@ethersproject/units" "^5.1.0"
     "@ethersproject/wallet" "^5.1.0"
     "@ethersproject/web" "^5.1.0"
     debug "^4.3.2"
