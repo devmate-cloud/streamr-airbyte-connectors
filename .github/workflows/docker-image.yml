@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  IMAGE_NAME: cmc-data
+  IMAGE_NAME: streamr-airbyte-connectors
 
 jobs:
   build:
