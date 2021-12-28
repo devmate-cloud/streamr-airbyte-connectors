@@ -9,9 +9,9 @@
 
 # Docker images
 
-https://hub.docker.com/repository/docker/mihthanh27/airbyte-destination-streamr
+https://github.com/devmate-cloud/streamr-airbyte-connectors/pkgs/container/streamr-airbyte-connectors
 ```
-docker pull mihthanh27/airbyte-destination-streamr
+docker pull ghcr.io/devmate-cloud/streamr-airbyte-connectors:main
 ```
 
 # How to use
