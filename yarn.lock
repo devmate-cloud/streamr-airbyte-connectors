@@ -1357,10 +1357,10 @@
     camel-case "4.1.2"
     tslib "~2.2.0"
 
-"@httptoolkit/httpolyglot@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@httptoolkit/httpolyglot/-/httpolyglot-1.0.1.tgz#2ade7c70fecc8473f8f55d95defea99bf444a81b"
-  integrity sha512-wka8aO36+Ldb4d0V7fpKf4gd9netRa1odekK5BQnsJa3BwkKSIqOYlR51ZfoaGjifwx2WBTRQgHgtcc1wY1eEg==
+"@httptoolkit/httpolyglot@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@httptoolkit/httpolyglot/-/httpolyglot-2.0.1.tgz#1ee1c7f86b82adca7b7a5f7bf001181166c8b56f"
+  integrity sha512-xhz5ilhpQfEeLTKJMQmlUbvuS7yeFrF5u0M5zUDNpBWu/QMHrnBRxIfqRSV8phJThOpo1DBXuBld6qF07UFk4g==
   dependencies:
     "@types/node" "^16.7.10"
 
@@ -6867,12 +6867,12 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
 mockttp@^2.3.1:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/mockttp/-/mockttp-2.4.0.tgz#3027d210be46d0695f60367d35737bb6c13e59c4"
-  integrity sha512-aMktxhtDGiKcH+vtcmZL41fPtR9u5ZanauurAOPVybH9QcryOVQN2wLjhxXqsvji348rtAWSjuZUmMYSBqaWTg==
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/mockttp/-/mockttp-2.5.0.tgz#b88f293455f2c45b64715629cf03bb571bffad67"
+  integrity sha512-eHgkcAloaGHFC/ZzkHZREA6j2gL3JRcFCXw4B1vO62l13BCv+GbJmRMtLKePjRwCYB4Ouh5W7pTft9w2gik3+A==
   dependencies:
     "@graphql-tools/schema" "^7.1.5"
-    "@httptoolkit/httpolyglot" "^1.0.0"
+    "@httptoolkit/httpolyglot" "^2.0.1"
     "@httptoolkit/proxy-agent" "^5.0.1-socks-lookup-fix.0"
     "@httptoolkit/subscriptions-transport-ws" "^0.9.19"
     "@httptoolkit/websocket-stream" "^6.0.0"
