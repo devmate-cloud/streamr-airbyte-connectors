@@ -1357,10 +1357,10 @@
     camel-case "4.1.2"
     tslib "~2.2.0"
 
-"@httptoolkit/httpolyglot@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@httptoolkit/httpolyglot/-/httpolyglot-1.0.1.tgz#2ade7c70fecc8473f8f55d95defea99bf444a81b"
-  integrity sha512-wka8aO36+Ldb4d0V7fpKf4gd9netRa1odekK5BQnsJa3BwkKSIqOYlR51ZfoaGjifwx2WBTRQgHgtcc1wY1eEg==
+"@httptoolkit/httpolyglot@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@httptoolkit/httpolyglot/-/httpolyglot-2.0.1.tgz#1ee1c7f86b82adca7b7a5f7bf001181166c8b56f"
+  integrity sha512-xhz5ilhpQfEeLTKJMQmlUbvuS7yeFrF5u0M5zUDNpBWu/QMHrnBRxIfqRSV8phJThOpo1DBXuBld6qF07UFk4g==
   dependencies:
     "@types/node" "^16.7.10"
 
@@ -6867,12 +6867,12 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
 mockttp@^2.3.1:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/mockttp/-/mockttp-2.4.0.tgz#3027d210be46d0695f60367d35737bb6c13e59c4"
-  integrity sha512-aMktxhtDGiKcH+vtcmZL41fPtR9u5ZanauurAOPVybH9QcryOVQN2wLjhxXqsvji348rtAWSjuZUmMYSBqaWTg==
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/mockttp/-/mockttp-2.5.1.tgz#dc40704203c01d4ec7d91421cc20bc1eae2e2c4d"
+  integrity sha512-giwCj28tCr6+RwRTTKnuf2qM7vI5hjs3+tKEcLnAiR1O8R9EHcjlgjBf7JvuF25clEDZKsLUg7NKbkB3CIUN6A==
   dependencies:
     "@graphql-tools/schema" "^7.1.5"
-    "@httptoolkit/httpolyglot" "^1.0.0"
+    "@httptoolkit/httpolyglot" "^2.0.1"
     "@httptoolkit/proxy-agent" "^5.0.1-socks-lookup-fix.0"
     "@httptoolkit/subscriptions-transport-ws" "^0.9.19"
     "@httptoolkit/websocket-stream" "^6.0.0"
@@ -6894,7 +6894,7 @@ mockttp@^2.3.1:
     http2-wrapper "2.0.5"
     lodash "^4.16.4"
     native-duplexpair "^1.0.0"
-    node-forge "^0.10.0"
+    node-forge "^1.2.1"
     performance-now "^2.1.0"
     portfinder "^1.0.23"
     typed-error "^3.0.2"
@@ -7016,10 +7016,10 @@ node-fetch@^2.6.1, node-fetch@~2.6.1:
   dependencies:
     whatwg-url "^5.0.0"
 
-node-forge@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"
-  integrity sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==
+node-forge@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-1.2.1.tgz#82794919071ef2eb5c509293325cec8afd0fd53c"
+  integrity sha512-Fcvtbb+zBcZXbTTVwqGA5W+MKBj56UjVRevvchv5XrcyXbmNdesfZL37nlcWOfpgHhgmxApw3tQbTr4CqNmX4w==
 
 node-gyp-build@^4.2.0, node-gyp-build@^4.3.0:
   version "4.3.0"
