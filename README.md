@@ -11,7 +11,7 @@
 
 https://github.com/devmate-cloud/streamr-airbyte-connectors/pkgs/container/streamr-airbyte-connectors
 ```
-docker pull ghcr.io/devmate-cloud/streamr-airbyte-connectors:main
+docker pull mihthanh27/airbyte-destination-streamr
 ```
 
 # How to use
