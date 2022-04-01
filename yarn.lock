@@ -1357,10 +1357,10 @@
     camel-case "4.1.2"
     tslib "~2.2.0"
 
-"@httptoolkit/httpolyglot@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@httptoolkit/httpolyglot/-/httpolyglot-1.0.1.tgz#2ade7c70fecc8473f8f55d95defea99bf444a81b"
-  integrity sha512-wka8aO36+Ldb4d0V7fpKf4gd9netRa1odekK5BQnsJa3BwkKSIqOYlR51ZfoaGjifwx2WBTRQgHgtcc1wY1eEg==
+"@httptoolkit/httpolyglot@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@httptoolkit/httpolyglot/-/httpolyglot-2.0.1.tgz#1ee1c7f86b82adca7b7a5f7bf001181166c8b56f"
+  integrity sha512-xhz5ilhpQfEeLTKJMQmlUbvuS7yeFrF5u0M5zUDNpBWu/QMHrnBRxIfqRSV8phJThOpo1DBXuBld6qF07UFk4g==
   dependencies:
     "@types/node" "^16.7.10"
 
@@ -5069,6 +5069,13 @@ graphql-subscriptions@^1.1.0:
   dependencies:
     iterall "^1.3.0"
 
+graphql-tag@^2.12.6:
+  version "2.12.6"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.6.tgz#d441a569c1d2537ef10ca3d1633b48725329b5f1"
+  integrity sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==
+  dependencies:
+    tslib "^2.1.0"
+
 "graphql@^14.0.2 || ^15.5", graphql@^15.5.0:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.7.2.tgz#85ab0eeb83722977151b3feb4d631b5f2ab287ef"
@@ -5194,13 +5201,13 @@ http-cache-semantics@^4.1.0:
   resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.1.0.tgz#49e91c5cbf36c9b94bcfcd71c23d5249ec74e390"
   integrity sha512-carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ==
 
-http-encoding@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/http-encoding/-/http-encoding-1.4.0.tgz#d4645dbb5963d8bb58643c47d27d2f565ebdfadc"
-  integrity sha512-/9OTWAsy31YMNpt7JRAZGsfUFFkkqdPR7TNXVSnrJ0UjrBHhx1CUa3veMjS6vSpCq3sU4wpIgVoK/snv80RTPQ==
+http-encoding@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/http-encoding/-/http-encoding-1.5.0.tgz#bdc98d1900c0901ea87506930b52fc9839797eb7"
+  integrity sha512-C/Lzx/4zdElYL3Her+bc/wX8oJuQkp3G+HTGXlSS2GINfj7LWqlwZsn2iZr4CExPqno7oPNgFfALhgscf9qnzA==
   dependencies:
     brotli-wasm "^1.1.0"
-    zstd-codec "^0.1.2"
+    zstd-codec "^0.1.4"
 
 http-errors@1.7.2:
   version "1.7.2"
@@ -6867,12 +6874,12 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
 mockttp@^2.3.1:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/mockttp/-/mockttp-2.4.0.tgz#3027d210be46d0695f60367d35737bb6c13e59c4"
-  integrity sha512-aMktxhtDGiKcH+vtcmZL41fPtR9u5ZanauurAOPVybH9QcryOVQN2wLjhxXqsvji348rtAWSjuZUmMYSBqaWTg==
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/mockttp/-/mockttp-2.7.0.tgz#4bd881c06868657747d759b268e2d56f88efa339"
+  integrity sha512-/XI9gzCInq6RlC2ch3s8u+NazqUytdt0fy77LxQH/0ww2rDIBrSW+Og1h7r6a4v2jKoflb5kRVIha07FVfRn0w==
   dependencies:
     "@graphql-tools/schema" "^7.1.5"
-    "@httptoolkit/httpolyglot" "^1.0.0"
+    "@httptoolkit/httpolyglot" "^2.0.1"
     "@httptoolkit/proxy-agent" "^5.0.1-socks-lookup-fix.0"
     "@httptoolkit/subscriptions-transport-ws" "^0.9.19"
     "@httptoolkit/websocket-stream" "^6.0.0"
@@ -6890,15 +6897,16 @@ mockttp@^2.3.1:
     fetch-ponyfill "^7.1.0"
     graphql "^14.0.2 || ^15.5"
     graphql-subscriptions "^1.1.0"
-    http-encoding "^1.4.0"
+    graphql-tag "^2.12.6"
+    http-encoding "^1.5.0"
     http2-wrapper "2.0.5"
     lodash "^4.16.4"
     native-duplexpair "^1.0.0"
-    node-forge "^0.10.0"
+    node-forge "^1.2.1"
     performance-now "^2.1.0"
     portfinder "^1.0.23"
     typed-error "^3.0.2"
-    uuid "^3.1.0"
+    uuid "^8.3.2"
     ws "^7.3.1"
 
 modify-values@^1.0.0:
@@ -7016,10 +7024,10 @@ node-fetch@^2.6.1, node-fetch@~2.6.1:
   dependencies:
     whatwg-url "^5.0.0"
 
-node-forge@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"
-  integrity sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==
+node-forge@^1.2.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-1.3.1.tgz#be8da2af243b2417d5f646a770663a92b7e9ded3"
+  integrity sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==
 
 node-gyp-build@^4.2.0, node-gyp-build@^4.3.0:
   version "4.3.0"
@@ -9160,7 +9168,7 @@ tslib@^1.11.1, tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.2.0, tslib@^2.3.0, tslib@^2.3.1:
+tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0, tslib@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
@@ -9385,7 +9393,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@^3.1.0, uuid@^3.3.2:
+uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
@@ -9750,7 +9758,7 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zstd-codec@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/zstd-codec/-/zstd-codec-0.1.2.tgz#6a13b7e666d9066d5236cbab760862a44f2660a0"
-  integrity sha512-t1gdk33h1wT7YcBPebyGWGJTWodKsJVfDeVN0q2x/htPGLEX3BAuBvOFsU4W3BplbmTXwvH8c/TUZ/DPTXOFfg==
+zstd-codec@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/zstd-codec/-/zstd-codec-0.1.4.tgz#6abb311b63cfacbd06e72797ee6c6e1c7c65248c"
+  integrity sha512-KYnWoFWgGtWyQEKNnUcb3u8ZtKO8dn5d8u+oGpxPlopqsPyv60U8suDyfk7Z7UtAO6Sk5i1aVcAs9RbaB1n36A==
