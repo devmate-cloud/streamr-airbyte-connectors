@@ -36,7 +36,7 @@
     "jsonata": "^1.8.5",
     "object-sizeof": "^1.6.1",
     "sqlite": "^4.0.23",
-    "streamr-client": "^5.4.5",
+    "streamr-client": "^6.0.10",
     "turndown": "^7.1.1",
     "verror": "^1.10.0"
   },
